@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
         rel="stylesheet"
     >
 
@@ -22,6 +22,7 @@
             --bg-dark: #080306;
             --accent-rose: #d64562;
             --accent-gold: #f3c77c;
+            --accent-gold-glow: rgba(243, 199, 124, 0.4);
             --text-main: #f9ecef;
             --text-muted: #cbb4be;
 
@@ -1388,7 +1389,7 @@
 
 
         /* =====================================================
-           GR ORXNGE
+           CELESTIAL CIPHER & JIHAN SIGNATURE EXPERIENCE
         ===================================================== */
 
         .signature-section {
@@ -1396,54 +1397,202 @@
                 center;
 
             margin:
-                100px auto
+                110px auto
                 60px;
 
             max-width:
-                700px;
+                850px;
+
+            position:
+                relative;
         }
 
-        .signature-name {
+        .cipher-badge {
             font-family:
                 'Cinzel',
                 serif;
 
             font-size:
-                clamp(
-                    2.4rem,
-                    7vw,
-                    4.5rem
-                );
+                0.75rem;
 
             letter-spacing:
-                8px;
+                6px;
 
             color:
                 var(--accent-gold);
 
+            text-transform:
+                uppercase;
+
+            opacity:
+                0.8;
+
             margin-bottom:
-                14px;
+                16px;
+
+            display:
+                inline-block;
+        }
+
+        /* The Decryption Cipher Showcase */
+        .cipher-box {
+            position:
+                relative;
+
+            display:
+                inline-block;
+
+            padding:
+                20px 40px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(214,69,98,0.12) 0%,
+                    rgba(8,3,6,0.6) 80%
+                );
+
+            border-radius:
+                20px;
+
+            border:
+                1px solid
+                rgba(243,199,124,0.3);
+
+            box-shadow:
+                0 0 50px rgba(214, 69, 98, 0.15),
+                inset 0 0 25px rgba(243, 199, 124, 0.05);
+
+            margin-bottom:
+                24px;
+
+            backdrop-filter:
+                blur(20px);
+
+            overflow:
+                hidden;
+        }
+
+        .cipher-box::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(243, 199, 124, 0.25) 90deg,
+                transparent 180deg
+            );
+            animation: rotateGlow 8s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateGlow {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .signature-name-cipher {
+            font-family:
+                'Cinzel',
+                serif;
+
+            font-weight:
+                900;
+
+            font-size:
+                clamp(
+                    3.2rem,
+                    9vw,
+                    5.8rem
+                );
+
+            letter-spacing:
+                16px;
+
+            color:
+                #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff 0%,
+                    var(--accent-gold) 50%,
+                    #fce8c3 100%
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
 
             text-shadow:
-                0 0 30px
-                rgba(243,199,124,0.18);
+                0 0 35px rgba(243, 199, 124, 0.4);
+
+            min-height:
+                1.2em;
+
+            display:
+                inline-block;
+
+            user-select:
+                none;
+
+            cursor:
+                pointer;
+
+            transition:
+                text-shadow 0.4s ease;
+        }
+
+        .signature-name-cipher:hover {
+            text-shadow:
+                0 0 60px rgba(243, 199, 124, 0.8),
+                0 0 20px rgba(214, 69, 98, 0.6);
+        }
+
+        .re-cipher-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(243, 199, 124, 0.2);
+            padding: 6px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .re-cipher-btn:hover {
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            background: rgba(243, 199, 124, 0.1);
+            transform: translateY(-2px);
         }
 
         .signature-line {
             width:
-                100px;
+                120px;
 
             height:
                 1px;
 
             margin:
-                0 auto
-                22px;
+                28px auto;
 
             background:
                 linear-gradient(
                     90deg,
                     transparent,
+                    var(--accent-gold),
                     var(--accent-rose),
                     transparent
                 );
@@ -1461,97 +1610,157 @@
                 italic;
 
             font-size:
-                1rem;
+                1.1rem;
 
             line-height:
-                1.7;
+                1.8;
 
             margin-bottom:
-                35px;
+                45px;
         }
 
-        .meaning-grid {
+        /* Mysterious 5-Star J-I-H-A-N Grid */
+        .jihan-constellation-grid {
             display:
                 grid;
 
             grid-template-columns:
-                repeat(2, 1fr);
+                repeat(5, 1fr);
 
             gap:
-                12px;
+                14px;
 
             text-align:
-                left;
+                center;
+
+            margin-top:
+                30px;
         }
 
-        .meaning-card {
+        .jihan-node-card {
+            position:
+                relative;
+
             padding:
-                16px
-                18px;
+                24px 14px;
 
             border:
                 1px solid
-                rgba(214,69,98,0.18);
+                rgba(243, 199, 124, 0.2);
 
             background:
-                rgba(255,255,255,0.025);
+                rgba(18, 7, 14, 0.6);
 
             border-radius:
-                14px;
+                18px;
+
+            backdrop-filter:
+                blur(12px);
+
+            overflow:
+                hidden;
+
+            cursor:
+                pointer;
 
             transition:
-                0.3s ease;
+                all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .meaning-card:hover {
+        .jihan-node-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at top,
+                rgba(243, 199, 124, 0.25),
+                transparent 70%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .jihan-node-card:hover {
             transform:
-                translateY(-3px);
+                translateY(-6px)
+                scale(1.02);
 
             border-color:
-                var(--accent-rose);
+                var(--accent-gold);
 
-            background:
-                rgba(214,69,98,0.07);
+            box-shadow:
+                0 12px 30px rgba(214, 69, 98, 0.25),
+                0 0 20px rgba(243, 199, 124, 0.2);
         }
 
-        .meaning-letter {
+        .jihan-node-card:hover::before {
+            opacity: 1;
+        }
+
+        .jihan-letter-glyph {
+            font-family:
+                'Cinzel',
+                serif;
+
+            font-weight:
+                900;
+
+            font-size:
+                2.2rem;
+
             color:
                 var(--accent-gold);
+
+            margin-bottom:
+                8px;
+
+            text-shadow:
+                0 0 15px rgba(243, 199, 124, 0.5);
+
+            transition:
+                transform 0.3s ease;
+        }
+
+        .jihan-node-card:hover .jihan-letter-glyph {
+            transform: scale(1.18);
+        }
+
+        .jihan-trait-title {
+            color:
+                var(--text-main);
 
             font-family:
                 'Cinzel',
                 serif;
 
             font-size:
-                1.1rem;
+                0.85rem;
 
             font-weight:
                 700;
+
+            letter-spacing:
+                1px;
+
+            margin-bottom:
+                8px;
         }
 
-        .meaning-word {
-            color:
-                var(--text-main);
-
-            font-weight:
-                600;
-
-            margin-left:
-                7px;
-        }
-
-        .meaning-description {
+        .jihan-trait-desc {
             color:
                 var(--text-muted);
 
             font-size:
-                0.82rem;
+                0.78rem;
 
             line-height:
                 1.5;
 
-            margin-top:
-                5px;
+            font-weight:
+                300;
         }
 
 
@@ -1884,6 +2093,18 @@
            RESPONSIVE
         ===================================================== */
 
+        @media (max-width: 768px) {
+
+            .jihan-constellation-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .signature-name-cipher {
+                letter-spacing: 8px;
+            }
+
+        }
+
         @media (max-width: 600px) {
 
             .container {
@@ -1935,16 +2156,6 @@
             .patch-item span:last-child {
                 white-space:
                     normal;
-            }
-
-            .meaning-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .signature-name {
-                letter-spacing:
-                    5px;
             }
 
             .audio-bar {
@@ -2787,162 +2998,85 @@
 
 
         <!-- =================================================
-             GR ORXNGE
+             CELESTIAL CIPHER & JIHAN SIGNATURE EXPERIENCE
         ================================================== -->
 
         <section
             class="signature-section reveal-on-scroll"
+            id="jihanCipherSection"
         >
 
-            <div class="signature-name">
-                GR ORXNGE
+            <span class="cipher-badge">
+                ✦ Celestial Decryption ✦
+            </span>
+
+            <div class="cipher-box">
+                <div
+                    class="signature-name-cipher"
+                    id="jihanCipher"
+                    data-value="JIHAN"
+                    onclick="triggerCipherDecryption()"
+                >
+                    ✦ ✦ ✦ ✦ ✦
+                </div>
+            </div>
+
+            <div>
+                <button
+                    class="re-cipher-btn"
+                    onclick="triggerCipherDecryption()"
+                >
+                    <span>⚡ Re-Decode Cipher</span>
+                </button>
             </div>
 
             <div class="signature-line"></div>
 
             <p class="signature-subtitle">
-                A name doesn't always need one definition.
-                Sometimes its meaning is everything behind it.
+                A name forged in light, intuition, and rare authenticity.
             </p>
 
-            <div class="meaning-grid">
+            <!-- Interactive 5-Letter Glyph Constellation -->
+            <div class="jihan-constellation-grid">
 
-                <div class="meaning-card">
-
-                    <span class="meaning-letter">
-                        G
-                    </span>
-
-                    <span class="meaning-word">
-                        Growth
-                    </span>
-
-                    <div class="meaning-description">
-                        Becoming better without forgetting where
-                        you started.
+                <div class="jihan-node-card">
+                    <div class="jihan-letter-glyph">J</div>
+                    <div class="jihan-trait-title">Joy</div>
+                    <div class="jihan-trait-desc">
+                        A radiant, effortless spark that brightens any environment.
                     </div>
-
                 </div>
 
-
-                <div class="meaning-card">
-
-                    <span class="meaning-letter">
-                        R
-                    </span>
-
-                    <span class="meaning-word">
-                        Resilience
-                    </span>
-
-                    <div class="meaning-description">
-                        Getting through what tried to break you.
+                <div class="jihan-node-card">
+                    <div class="jihan-letter-glyph">I</div>
+                    <div class="jihan-trait-title">Intuition</div>
+                    <div class="jihan-trait-desc">
+                        A quiet, perceptiveness that sees straight to what matters.
                     </div>
-
                 </div>
 
-
-                <div class="meaning-card">
-
-                    <span class="meaning-letter">
-                        O
-                    </span>
-
-                    <span class="meaning-word">
-                        Originality
-                    </span>
-
-                    <div class="meaning-description">
-                        Being yourself instead of becoming a copy.
+                <div class="jihan-node-card">
+                    <div class="jihan-letter-glyph">H</div>
+                    <div class="jihan-trait-title">Heart</div>
+                    <div class="jihan-trait-desc">
+                        A genuine warmth that turns simple moments into lifelong memories.
                     </div>
-
                 </div>
 
-
-                <div class="meaning-card">
-
-                    <span class="meaning-letter">
-                        R
-                    </span>
-
-                    <span class="meaning-word">
-                        Realness
-                    </span>
-
-                    <div class="meaning-description">
-                        Keeping things honest, even when honesty
-                        is difficult.
+                <div class="jihan-node-card">
+                    <div class="jihan-letter-glyph">A</div>
+                    <div class="jihan-trait-title">Aura</div>
+                    <div class="jihan-trait-desc">
+                        An undeniable presence that is entirely, unapologetically herself.
                     </div>
-
                 </div>
 
-
-                <div class="meaning-card">
-
-                    <span class="meaning-letter">
-                        X
-                    </span>
-
-                    <span class="meaning-word">
-                        X-Factor
-                    </span>
-
-                    <div class="meaning-description">
-                        The part that cannot be explained,
-                        measured, or copied.
+                <div class="jihan-node-card">
+                    <div class="jihan-letter-glyph">N</div>
+                    <div class="jihan-trait-title">Next</div>
+                    <div class="jihan-trait-desc">
+                        A continuous evolution toward bigger dreams and brighter pages.
                     </div>
-
-                </div>
-
-
-                <div class="meaning-card">
-
-                    <span class="meaning-letter">
-                        N
-                    </span>
-
-                    <span class="meaning-word">
-                        No Definition
-                    </span>
-
-                    <div class="meaning-description">
-                        Not everything beautiful needs a definition.
-                    </div>
-
-                </div>
-
-
-                <div class="meaning-card">
-
-                    <span class="meaning-letter">
-                        G
-                    </span>
-
-                    <span class="meaning-word">
-                        Grace
-                    </span>
-
-                    <div class="meaning-description">
-                        Staying gentle without becoming weak.
-                    </div>
-
-                </div>
-
-
-                <div class="meaning-card">
-
-                    <span class="meaning-letter">
-                        E
-                    </span>
-
-                    <span class="meaning-word">
-                        Evolution
-                    </span>
-
-                    <div class="meaning-description">
-                        Changing, growing, and continuing forward.
-                    </div>
-
                 </div>
 
             </div>
@@ -2955,8 +3089,7 @@
         ================================================== -->
 
         <footer>
-            Written with memories, built with code,
-            signed <strong>GR ORXNGE</strong>. ✨
+            Written with memories, built with code, dedicated entirely to <strong>JIHAN ✨</strong>.
         </footer>
 
     </div>
@@ -3005,6 +3138,48 @@
 
 
     <script>
+
+        /* =====================================================
+           CELESTIAL CIPHER DECRYPTION ANIMATION FOR JIHAN
+        ===================================================== */
+
+        const glyphSymbols = ['✦', '✧', '◈', '⬡', '▲', '✶', '✺', '⚡', '❂', '❇'];
+        let cipherInterval = null;
+        let cipherDecoded = false;
+
+        function triggerCipherDecryption() {
+            const cipherEl = document.getElementById('jihanCipher');
+            const targetText = cipherEl.getAttribute('data-value');
+            let iteration = 0;
+
+            clearInterval(cipherInterval);
+
+            cipherInterval = setInterval(() => {
+                cipherEl.innerText = targetText
+                    .split('')
+                    .map((char, index) => {
+                        if (index < iteration) {
+                            return targetText[index];
+                        }
+                        return glyphSymbols[Math.floor(Math.random() * glyphSymbols.length)];
+                    })
+                    .join(' ');
+
+                if (iteration >= targetText.length) {
+                    clearInterval(cipherInterval);
+                    if (!cipherDecoded) {
+                        cipherDecoded = true;
+                        showAchievement(
+                            'NAME DECRYPTED ✨',
+                            'Target identified: JIHAN.<br>The central star of this story. 👑'
+                        );
+                    }
+                }
+
+                iteration += 1 / 3;
+            }, 50);
+        }
+
 
         /* =====================================================
            OPEN COVER + START MUSIC
@@ -3335,7 +3510,7 @@
 
 
         /* =====================================================
-           SCROLL REVEAL
+           SCROLL REVEAL & AUTOMATIC CIPHER TRIGGER
         ===================================================== */
 
         const revealElements =
@@ -3358,6 +3533,10 @@
                                 entry.target.classList.add(
                                     'visible'
                                 );
+
+                                if (entry.target.id === 'jihanCipherSection') {
+                                    triggerCipherDecryption();
+                                }
 
                                 revealObserver.unobserve(
                                     entry.target
