@@ -53,6 +53,18 @@
             overflow: hidden;
         }
 
+        /* Hides main content while cover is active to prevent bleed-through */
+        .container, .audio-bar {
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        body.cover-active .container,
+        body.cover-active .audio-bar {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
 
         /* =====================================================
            COVER PAGE
@@ -73,11 +85,12 @@
 
             z-index: 5000;
 
+            background-color: var(--bg-dark);
             background:
                 radial-gradient(
                     circle at center,
-                    rgba(45, 11, 24, 0.72) 0%,
-                    rgba(8, 3, 6, 0.96) 75%
+                    #2d0b18 0%,
+                    #080306 85%
                 );
 
             overflow: hidden;
@@ -3013,11 +3026,6 @@
                 document.getElementById(
                     'playToggle'
                 );
-
-            /*
-                The Open button is a user interaction.
-                That allows the browser to start the audio here.
-            */
 
             audio.play()
                 .then(() => {
