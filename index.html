@@ -49,20 +49,9 @@
             min-height: 100vh;
         }
 
+        /* Lock the page while cover is active */
         body.cover-active {
             overflow: hidden;
-        }
-
-        /* Hides main content while cover is active to prevent bleed-through */
-        .container, .audio-bar {
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        body.cover-active .container,
-        body.cover-active .audio-bar {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
         }
 
 
@@ -83,66 +72,83 @@
 
             text-align: center;
 
-            z-index: 5000;
+            /* Very high so absolutely nothing appears above it */
+            z-index: 99999;
 
-            background-color: var(--bg-dark);
-            background:
-                radial-gradient(
-                    circle at center,
-                    #2d0b18 0%,
-                    #080306 85%
-                );
+            /* IMPORTANT:
+               Solid base color prevents any main-page content
+               from showing through the cover.
+            */
+            background: #080306;
 
             overflow: hidden;
+
+            opacity: 1;
+            visibility: visible;
 
             transition:
                 opacity 1.2s ease,
                 visibility 1.2s ease;
         }
 
+
+        /* Cover's own background image */
         .cover-page::before {
             content: "";
 
             position: absolute;
-            inset: 0;
+
+            inset: -40px;
 
             background:
                 url('image_501e09.jpg')
                 center / cover no-repeat;
 
             filter:
-                blur(14px)
-                brightness(0.3)
+                blur(16px)
+                brightness(0.28)
                 contrast(1.05);
 
             transform: scale(1.08);
 
-            z-index: -2;
+            z-index: 0;
         }
 
+
+        /* Cover's own dark overlay */
         .cover-page::after {
             content: "";
 
             position: absolute;
+
             inset: 0;
 
             background:
                 radial-gradient(
                     circle at center,
-                    rgba(214, 69, 98, 0.08),
-                    transparent 45%
+                    rgba(45, 11, 24, 0.35) 0%,
+                    rgba(8, 3, 6, 0.82) 60%,
+                    rgba(8, 3, 6, 1) 100%
                 );
 
-            z-index: -1;
+            z-index: 1;
         }
 
+
+        /* Hidden after Open */
         .cover-page.opened {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
+
+        /* Cover content above all cover layers */
         .cover-content {
+            position: relative;
+
+            z-index: 2;
+
             width: min(90%, 700px);
 
             display: flex;
@@ -153,10 +159,14 @@
                 coverAppear 1.5s ease;
         }
 
-        .cover-small {
-            font-family: 'Cinzel', serif;
 
-            color: var(--accent-gold);
+        .cover-small {
+            font-family:
+                'Cinzel',
+                serif;
+
+            color:
+                var(--accent-gold);
 
             font-size: 0.78rem;
 
@@ -168,6 +178,7 @@
 
             opacity: 0.9;
         }
+
 
         .cover-title {
             font-family:
@@ -197,8 +208,10 @@
             margin-bottom: 20px;
 
             text-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.55);
+                0 15px 40px
+                rgba(0,0,0,0.55);
         }
+
 
         .cover-subtitle {
             font-family:
@@ -224,6 +237,7 @@
             margin-bottom: 42px;
         }
 
+
         .cover-line {
             width: 90px;
             height: 1px;
@@ -238,6 +252,7 @@
 
             margin-bottom: 40px;
         }
+
 
         .open-button {
             position: relative;
@@ -270,13 +285,15 @@
 
             cursor: pointer;
 
-            backdrop-filter: blur(10px);
+            backdrop-filter:
+                blur(10px);
 
             transition:
                 transform 0.3s ease,
                 background 0.3s ease,
                 box-shadow 0.3s ease;
         }
+
 
         .open-button:hover {
             transform:
@@ -291,10 +308,12 @@
                 rgba(214, 69, 98, 0.2);
         }
 
+
         .open-button:active {
             transform:
                 scale(0.98);
         }
+
 
         .cover-footer {
             margin-top: 34px;
@@ -309,10 +328,12 @@
             text-transform: uppercase;
         }
 
+
         @keyframes coverAppear {
 
             from {
                 opacity: 0;
+
                 transform:
                     translateY(30px)
                     scale(0.97);
@@ -320,6 +341,7 @@
 
             to {
                 opacity: 1;
+
                 transform:
                     translateY(0)
                     scale(1);
@@ -334,6 +356,7 @@
 
         .bg-fixed {
             position: fixed;
+
             top: 0;
             left: 0;
 
@@ -356,8 +379,10 @@
             z-index: -3;
         }
 
+
         .bg-overlay {
             position: fixed;
+
             inset: 0;
 
             width: 100vw;
@@ -375,11 +400,12 @@
 
 
         /* =====================================================
-           FLOATING PARTICLES
+           PARTICLES
         ===================================================== */
 
         .particles {
             position: fixed;
+
             inset: 0;
 
             pointer-events: none;
@@ -388,6 +414,7 @@
 
             overflow: hidden;
         }
+
 
         .particle {
             position: absolute;
@@ -403,6 +430,7 @@
             animation:
                 floatParticle linear infinite;
         }
+
 
         @keyframes floatParticle {
 
@@ -434,7 +462,7 @@
 
 
         /* =====================================================
-           MAIN CONTAINER
+           CONTAINER
         ===================================================== */
 
         .container {
@@ -472,6 +500,7 @@
                 heroFade 1.8s ease-out;
         }
 
+
         .badge {
             display: inline-block;
 
@@ -492,9 +521,11 @@
                 'Cinzel',
                 serif;
 
-            font-size: 0.85rem;
+            font-size:
+                0.85rem;
 
-            letter-spacing: 3px;
+            letter-spacing:
+                3px;
 
             color:
                 var(--accent-gold);
@@ -502,7 +533,8 @@
             text-transform:
                 uppercase;
 
-            margin-bottom: 24px;
+            margin-bottom:
+                24px;
 
             backdrop-filter:
                 blur(10px);
@@ -511,6 +543,7 @@
                 0 0 20px
                 rgba(214, 69, 98, 0.2);
         }
+
 
         h1.title {
             font-family:
@@ -524,9 +557,11 @@
                     6rem
                 );
 
-            font-weight: 700;
+            font-weight:
+                700;
 
-            line-height: 1.1;
+            line-height:
+                1.1;
 
             background:
                 linear-gradient(
@@ -536,33 +571,43 @@
                     var(--accent-gold) 100%
                 );
 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip:
+                text;
 
-            margin-bottom: 20px;
+            -webkit-text-fill-color:
+                transparent;
+
+            margin-bottom:
+                20px;
 
             text-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.5);
+                0 10px 30px
+                rgba(0,0,0,0.5);
 
-            cursor: pointer;
+            cursor:
+                pointer;
 
-            user-select: none;
+            user-select:
+                none;
 
             transition:
                 transform 0.3s ease;
         }
+
 
         h1.title:hover {
             transform:
                 scale(1.015);
         }
 
+
         .subtitle {
             font-family:
                 'Playfair Display',
                 serif;
 
-            font-style: italic;
+            font-style:
+                italic;
 
             font-size:
                 clamp(
@@ -574,15 +619,20 @@
             color:
                 var(--text-muted);
 
-            max-width: 700px;
+            max-width:
+                700px;
 
-            line-height: 1.6;
+            line-height:
+                1.6;
 
-            margin-bottom: 40px;
+            margin-bottom:
+                40px;
         }
 
+
         .scroll-hint {
-            font-size: 0.75rem;
+            font-size:
+                0.75rem;
 
             color:
                 var(--text-muted);
@@ -590,23 +640,31 @@
             text-transform:
                 uppercase;
 
-            letter-spacing: 3px;
+            letter-spacing:
+                3px;
 
             animation:
                 breathing 2.5s
                 ease-in-out infinite;
         }
 
+
         @keyframes breathing {
 
             0%, 100% {
-                opacity: 0.4;
-                transform: translateY(0);
+                opacity:
+                    0.4;
+
+                transform:
+                    translateY(0);
             }
 
             50% {
-                opacity: 1;
-                transform: translateY(6px);
+                opacity:
+                    1;
+
+                transform:
+                    translateY(6px);
             }
 
         }
@@ -641,7 +699,7 @@
 
             box-shadow:
                 0 15px 35px
-                rgba(0, 0, 0, 0.4);
+                rgba(0,0,0,0.4);
 
             transition:
                 transform 0.4s ease,
@@ -649,13 +707,14 @@
                 box-shadow 0.4s ease;
         }
 
+
         .glass-card:hover {
             border-color:
                 var(--glass-hover);
 
             box-shadow:
                 0 20px 45px
-                rgba(214, 69, 98, 0.15);
+                rgba(214,69,98,0.15);
 
             transform:
                 translateY(-4px);
@@ -683,7 +742,8 @@
             letter-spacing:
                 2px;
 
-            display: flex;
+            display:
+                flex;
 
             align-items:
                 center;
@@ -692,11 +752,13 @@
                 12px;
         }
 
+
         .section-header::after {
             content:
                 '';
 
-            flex: 1;
+            flex:
+                1;
 
             height:
                 1px;
@@ -728,15 +790,18 @@
                 300;
         }
 
+
         .prose-text p {
             margin-bottom:
                 20px;
         }
 
+
         .prose-text p:last-child {
             margin-bottom:
                 0;
         }
+
 
         .highlight-quote {
             font-family:
@@ -791,6 +856,7 @@
                 20px;
         }
 
+
         .secret-card {
             background:
                 rgba(255,255,255,0.03);
@@ -823,6 +889,7 @@
                 hidden;
         }
 
+
         .secret-card:hover {
             background:
                 rgba(214,69,98,0.1);
@@ -837,6 +904,7 @@
                 translateY(-3px);
         }
 
+
         .secret-card .icon {
             font-size:
                 2rem;
@@ -847,6 +915,7 @@
             display:
                 block;
         }
+
 
         .secret-card h4 {
             font-family:
@@ -862,6 +931,7 @@
             margin-bottom:
                 8px;
         }
+
 
         .secret-card p.hidden-content {
             font-size:
@@ -887,6 +957,7 @@
                 1.5;
         }
 
+
         .secret-card.revealed
         p.hidden-content {
             opacity:
@@ -899,11 +970,13 @@
                 12px;
         }
 
+
         .secret-card.revealed
         .tap-hint {
             display:
                 none;
         }
+
 
         .tap-hint {
             font-size:
@@ -938,6 +1011,7 @@
                 24px;
         }
 
+
         .mission-grid {
             display:
                 grid;
@@ -954,6 +1028,7 @@
             gap:
                 14px;
         }
+
 
         .mission-item {
             position:
@@ -979,6 +1054,7 @@
                 0.3s ease;
         }
 
+
         .mission-item:hover {
             transform:
                 translateY(-3px);
@@ -989,6 +1065,7 @@
             background:
                 rgba(214,69,98,0.07);
         }
+
 
         .mission-icon {
             font-size:
@@ -1004,6 +1081,7 @@
                 transform 0.3s ease;
         }
 
+
         .mission-title {
             font-weight:
                 600;
@@ -1014,6 +1092,7 @@
             color:
                 var(--text-main);
         }
+
 
         .mission-status {
             color:
@@ -1026,6 +1105,7 @@
                 1.5;
         }
 
+
         .mission-item.completed {
             border-color:
                 rgba(243,199,124,0.5);
@@ -1034,17 +1114,20 @@
                 rgba(243,199,124,0.06);
         }
 
+
         .mission-item.completed
         .mission-status {
             color:
                 var(--accent-gold);
         }
 
+
         .mission-item.completed
         .mission-icon {
             transform:
                 scale(1.12);
         }
+
 
         .mission-progress {
             margin-top:
@@ -1061,6 +1144,7 @@
                 center;
         }
 
+
         .progress-label {
             color:
                 var(--text-muted);
@@ -1071,6 +1155,7 @@
             margin-bottom:
                 10px;
         }
+
 
         .progress-track {
             width:
@@ -1088,6 +1173,7 @@
             overflow:
                 hidden;
         }
+
 
         .progress-fill {
             width:
@@ -1109,6 +1195,7 @@
             transition:
                 width 0.5s ease;
         }
+
 
         .mission-result {
             margin-top:
@@ -1161,6 +1248,7 @@
                 rgba(0,0,0,0.35);
         }
 
+
         .patch-title {
             font-family:
                 'Cinzel',
@@ -1179,6 +1267,7 @@
                 1.5px;
         }
 
+
         .patch-subtitle {
             color:
                 var(--text-muted);
@@ -1193,6 +1282,7 @@
                 1.6;
         }
 
+
         .patch-list {
             display:
                 grid;
@@ -1200,6 +1290,7 @@
             gap:
                 12px;
         }
+
 
         .patch-item {
             display:
@@ -1232,6 +1323,7 @@
                 background 0.3s ease;
         }
 
+
         .patch-item:hover {
             transform:
                 translateX(5px);
@@ -1239,6 +1331,7 @@
             background:
                 rgba(214,69,98,0.08);
         }
+
 
         .patch-item span:last-child {
             color:
@@ -1271,6 +1364,7 @@
                 720px;
         }
 
+
         .final-message .big-line {
             font-family:
                 'Playfair Display',
@@ -1296,6 +1390,7 @@
                 20px;
         }
 
+
         .final-message > p {
             color:
                 var(--text-muted);
@@ -1306,6 +1401,7 @@
             line-height:
                 1.8;
         }
+
 
         .reveal-btn {
             margin-top:
@@ -1341,6 +1437,7 @@
                 opacity 0.3s ease;
         }
 
+
         .reveal-btn:hover {
             background:
                 rgba(214,69,98,0.25);
@@ -1349,6 +1446,7 @@
                 scale(1.04);
         }
 
+
         .reveal-btn:disabled {
             cursor:
                 default;
@@ -1356,6 +1454,7 @@
             opacity:
                 0.65;
         }
+
 
         .hidden-final {
             display:
@@ -1377,6 +1476,7 @@
             color:
                 var(--text-main);
         }
+
 
         .hidden-final.show {
             display:
@@ -1402,6 +1502,7 @@
             max-width:
                 700px;
         }
+
 
         .signature-name {
             font-family:
@@ -1429,6 +1530,7 @@
                 rgba(243,199,124,0.18);
         }
 
+
         .signature-line {
             width:
                 100px;
@@ -1448,6 +1550,7 @@
                     transparent
                 );
         }
+
 
         .signature-subtitle {
             color:
@@ -1470,12 +1573,16 @@
                 35px;
         }
 
+
         .meaning-grid {
             display:
                 grid;
 
             grid-template-columns:
-                repeat(2, 1fr);
+                repeat(
+                    2,
+                    1fr
+                );
 
             gap:
                 12px;
@@ -1483,6 +1590,7 @@
             text-align:
                 left;
         }
+
 
         .meaning-card {
             padding:
@@ -1503,6 +1611,7 @@
                 0.3s ease;
         }
 
+
         .meaning-card:hover {
             transform:
                 translateY(-3px);
@@ -1513,6 +1622,7 @@
             background:
                 rgba(214,69,98,0.07);
         }
+
 
         .meaning-letter {
             color:
@@ -1529,6 +1639,7 @@
                 700;
         }
 
+
         .meaning-word {
             color:
                 var(--text-main);
@@ -1539,6 +1650,7 @@
             margin-left:
                 7px;
         }
+
 
         .meaning-description {
             color:
@@ -1598,7 +1710,7 @@
                 rgba(0,0,0,0.5);
 
             z-index:
-                1000;
+                100000;
 
             opacity:
                 0;
@@ -1611,6 +1723,7 @@
                 none;
         }
 
+
         .achievement.show {
             transform:
                 translateX(-50%)
@@ -1619,6 +1732,7 @@
             opacity:
                 1;
         }
+
 
         .achievement-title {
             color:
@@ -1637,6 +1751,7 @@
             margin-bottom:
                 5px;
         }
+
 
         .achievement-text {
             color:
@@ -1704,6 +1819,7 @@
                 calc(100vw - 30px);
         }
 
+
         .play-btn {
             background:
                 var(--accent-rose);
@@ -1743,6 +1859,7 @@
                 0;
         }
 
+
         .play-btn:hover {
             transform:
                 scale(1.1);
@@ -1750,6 +1867,7 @@
             background:
                 #eb506d;
         }
+
 
         .track-info {
             font-size:
@@ -1761,6 +1879,7 @@
             white-space:
                 nowrap;
         }
+
 
         .track-info span {
             display:
@@ -1801,6 +1920,7 @@
                 80px;
         }
 
+
         footer strong {
             color:
                 var(--accent-gold);
@@ -1825,6 +1945,7 @@
                 opacity 0.8s ease,
                 transform 0.8s ease;
         }
+
 
         .reveal-on-scroll.visible {
             opacity:
@@ -1858,6 +1979,7 @@
             }
 
         }
+
 
         @keyframes heroFade {
 
@@ -2042,7 +2164,7 @@
 
 
     <!-- =====================================================
-         BACKGROUND
+         MAIN BACKGROUND
     ===================================================== -->
 
     <div class="bg-fixed"></div>
@@ -2056,7 +2178,7 @@
 
 
     <!-- =====================================================
-         ACHIEVEMENT
+         ACHIEVEMENT POPUP
     ===================================================== -->
 
     <div
@@ -2081,7 +2203,7 @@
 
 
     <!-- =====================================================
-         MAIN
+         MAIN PAGE
     ===================================================== -->
 
     <div class="container">
@@ -2363,6 +2485,7 @@
 
             <div class="secret-notes-grid">
 
+
                 <div
                     class="secret-card"
                     onclick="toggleCard(this)"
@@ -2465,6 +2588,7 @@
             </p>
 
             <div class="mission-grid">
+
 
                 <div
                     class="mission-item"
@@ -2624,7 +2748,7 @@
         >
 
             <div class="patch-title">
-                Jihan 2026— Birthday Patch Notes 🎂
+                Jihan 2026.0 — Birthday Patch Notes 🎂
             </div>
 
             <div class="patch-subtitle">
@@ -2634,6 +2758,7 @@
             </div>
 
             <div class="patch-list">
+
 
                 <div class="patch-item">
 
@@ -2768,7 +2893,7 @@
                 Please enjoy your day, even in the simplest ways.
                 Laugh as much as possible, enjoy the little moments,
                 keep the good memories, and let yourself have a
-                genuinely beautiful day. w heydi lmeska.
+                genuinely beautiful day.
 
                 <br><br>
 
@@ -2806,6 +2931,7 @@
             </p>
 
             <div class="meaning-grid">
+
 
                 <div class="meaning-card">
 
@@ -2993,7 +3119,7 @@
             preload="auto"
         >
 
-            <!-- EXACT GITHUB FILE NAME -->
+            <!-- EXACT FILE NAME -->
             <source
                 src="in the pool.mp3"
                 type="audio/mpeg"
@@ -3027,6 +3153,12 @@
                     'playToggle'
                 );
 
+
+            /*
+                The Open button is a direct user interaction,
+                which allows the browser to start the audio here.
+            */
+
             audio.play()
                 .then(() => {
 
@@ -3037,25 +3169,32 @@
                 .catch(() => {
 
                     console.log(
-                        'Browser prevented automatic audio playback.'
+                        'Audio playback was blocked by the browser.'
                     );
 
                 });
 
+
+            /* Unlock scrolling */
             document.body.classList.remove(
                 'cover-active'
             );
 
+
+            /* Fade away the cover */
             cover.classList.add(
                 'opened'
             );
 
+
+            /* Reset to the top of the main page */
             setTimeout(() => {
 
                 window.scrollTo({
                     top: 0,
                     behavior: 'instant'
                 });
+
 
                 revealElements.forEach(
                     element => {
@@ -3103,6 +3242,7 @@
 
         const totalMissions = 6;
 
+
         function completeMission(item) {
 
             if (
@@ -3115,19 +3255,24 @@
 
             }
 
+
             item.classList.add(
                 'completed'
             );
+
 
             const status =
                 item.querySelector(
                     '.mission-status'
                 );
 
+
             status.innerText =
                 '✓ Mission completed.';
 
+
             completedMissions++;
+
 
             const percentage =
                 (
@@ -3135,15 +3280,18 @@
                     totalMissions
                 ) * 100;
 
+
             document.getElementById(
                 'missionProgress'
             ).style.width =
                 percentage + '%';
 
+
             const result =
                 document.getElementById(
                     'missionResult'
                 );
+
 
             if (
                 completedMissions === 1
@@ -3155,7 +3303,8 @@
             }
 
             else if (
-                completedMissions < totalMissions
+                completedMissions <
+                totalMissions
             ) {
 
                 result.innerText =
@@ -3167,6 +3316,7 @@
 
                 result.innerText =
                     '6 / 6 missions completed. Birthday successfully deployed. 🎉';
+
 
                 showAchievement(
                     'BIRTHDAY MISSION COMPLETE ✨',
@@ -3189,19 +3339,24 @@
                     'finalSecret'
                 );
 
+
             const button =
                 document.getElementById(
                     'finalButton'
                 );
 
+
             message.classList.add(
                 'show'
             );
 
+
             button.innerText =
                 "Okay... that's enough 😂";
 
+
             button.disabled = true;
+
 
             setTimeout(() => {
 
@@ -3216,7 +3371,7 @@
 
 
         /* =====================================================
-           AUDIO PLAYER
+           AUDIO CONTROLS
         ===================================================== */
 
         function toggleAudio() {
@@ -3226,10 +3381,12 @@
                     'bgMusic'
                 );
 
+
             const btn =
                 document.getElementById(
                     'playToggle'
                 );
+
 
             if (
                 audio.paused
@@ -3275,6 +3432,7 @@
                 'particles'
             );
 
+
         for (
             let i = 0;
             i < 35;
@@ -3286,13 +3444,16 @@
                     'div'
                 );
 
+
             particle.className =
                 'particle';
+
 
             particle.style.left =
                 Math.random() *
                 100 +
                 '%';
+
 
             particle.style.animationDuration =
                 (
@@ -3302,6 +3463,7 @@
                 ) +
                 's';
 
+
             particle.style.animationDelay =
                 (
                     Math.random() *
@@ -3309,23 +3471,28 @@
                 ) +
                 's';
 
+
             particle.style.opacity =
                 0.2 +
                 Math.random() *
                 0.6;
+
 
             const size =
                 1 +
                 Math.random() *
                 3;
 
+
             particle.style.width =
                 size +
                 'px';
 
+
             particle.style.height =
                 size +
                 'px';
+
 
             particles.appendChild(
                 particle
@@ -3343,6 +3510,7 @@
                 '.reveal-on-scroll'
             );
 
+
         const revealObserver =
             new IntersectionObserver(
 
@@ -3359,6 +3527,7 @@
                                     'visible'
                                 );
 
+
                                 revealObserver.unobserve(
                                     entry.target
                                 );
@@ -3371,10 +3540,12 @@
                 },
 
                 {
-                    threshold: 0.12
+                    threshold:
+                        0.12
                 }
 
             );
+
 
         revealElements.forEach(
             element => {
@@ -3396,15 +3567,18 @@
                 'birthdayTitle'
             );
 
+
         const achievement =
             document.getElementById(
                 'achievement'
             );
 
+
         const achievementText =
             document.getElementById(
                 'achievementText'
             );
+
 
         function showAchievement(
             title,
@@ -3416,12 +3590,15 @@
             ).innerText =
                 title;
 
+
             achievementText.innerHTML =
                 text;
+
 
             achievement.classList.add(
                 'show'
             );
+
 
             setTimeout(() => {
 
@@ -3435,13 +3612,14 @@
 
 
         /* =====================================================
-           5 CLICK EASTER EGG
+           5-CLICK EASTER EGG
         ===================================================== */
 
         let titleClicks = 0;
 
         let achievementTriggered =
             false;
+
 
         birthdayTitle.addEventListener(
             'click',
@@ -3455,7 +3633,9 @@
 
                 }
 
+
                 titleClicks++;
+
 
                 birthdayTitle.style.transform =
                     `scale(${
@@ -3464,6 +3644,7 @@
                         0.012
                     })`;
 
+
                 if (
                     titleClicks >= 5
                 ) {
@@ -3471,10 +3652,12 @@
                     achievementTriggered =
                         true;
 
+
                     showAchievement(
                         'ACHIEVEMENT UNLOCKED ✨',
                         'Birthday Girl detected.<br>You have officially clicked something you were not supposed to click. 😂'
                     );
+
 
                     birthdayTitle.style.transform =
                         'scale(1)';
@@ -3491,12 +3674,14 @@
 
         let secretCode = '';
 
+
         document.addEventListener(
             'keydown',
             (event) => {
 
                 secretCode +=
                     event.key.toLowerCase();
+
 
                 if (
                     secretCode.length >
@@ -3510,6 +3695,7 @@
 
                 }
 
+
                 if (
                     secretCode.includes(
                         'jihan'
@@ -3520,6 +3706,7 @@
                         'SECRET DISCOVERED ✨',
                         'You found the secret word.<br>Okay detective. 😂'
                     );
+
 
                     secretCode = '';
 
@@ -3538,6 +3725,7 @@
                 'bgMusic'
             );
 
+
         bgMusic.addEventListener(
             'play',
             () => {
@@ -3549,6 +3737,7 @@
 
             }
         );
+
 
         bgMusic.addEventListener(
             'pause',
