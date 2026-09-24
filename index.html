@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Presentation</title>
+    <title>A Special Space For You ✨</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
@@ -17,137 +17,205 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            background: radial-gradient(circle at top left, #2e1065, #0f172a),
+                        linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
             color: #ffffff;
             padding: 20px;
+            overflow-x: hidden;
         }
 
+        /* Glassmorphism Card Container */
         .container {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 500px;
+            border-radius: 28px;
+            padding: 40px 32px;
+            max-width: 520px;
             width: 100%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
             text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sparkle-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: inline-block;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.15); opacity: 1; }
         }
 
         h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-weight: 700;
             margin-bottom: 12px;
-            color: #f8fafc;
+            background: linear-gradient(135deg, #ffffff, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        p {
-            font-size: 0.95rem;
+        p.subtitle {
+            font-size: 1rem;
             color: #cbd5e1;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             line-height: 1.6;
         }
 
-        .btn {
-            background: linear-gradient(135deg, #6366f1, #a855f7);
+        /* Primary Action Buttons */
+        .btn-reveal {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
             color: white;
             border: none;
-            padding: 12px 28px;
-            font-size: 1rem;
+            padding: 14px 32px;
+            font-size: 1.05rem;
             font-weight: 600;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(236, 72, 153, 0.35);
+            width: 100%;
         }
 
-        .btn:hover {
+        .btn-reveal:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
         }
 
+        /* Hidden Content Block */
         .hidden-content {
             display: none;
-            margin-top: 24px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            animation: fadeIn 0.5s ease-in-out forwards;
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .special-message {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 24px;
+            color: #f1f5f9;
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+
+        /* Wish Form Section */
+        .wish-section h2 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: #f472b6;
+        }
+
+        .wish-section p {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            margin-bottom: 16px;
         }
 
         form {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 16px;
         }
 
-        input, textarea {
+        textarea {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.2);
-            color: #fff;
-            font-size: 0.9rem;
+            padding: 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(15, 23, 42, 0.5);
+            color: #ffffff;
+            font-size: 1rem;
             outline: none;
+            resize: vertical;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        input::placeholder, textarea::placeholder {
-            color: #94a3b8;
+        textarea:focus {
+            border-color: #f472b6;
+            box-shadow: 0 0 12px rgba(244, 114, 182, 0.25);
         }
 
-        .submit-btn {
-            background: #10b981;
-            margin-top: 8px;
+        textarea::placeholder {
+            color: #64748b;
         }
 
-        .submit-btn:hover {
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        .btn-submit {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(16, 185, 129, 0.45);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Special Interactive Message</h1>
-        <p>Click the button below to reveal the hidden presentation message.</p>
+        <div class="sparkle-icon">✨</div>
+        <h1>A Little Surprise</h1>
+        <p class="subtitle">Click the button below whenever you're ready.</p>
         
-        <button class="btn" id="revealBtn" onclick="toggleMessage()">Reveal Message</button>
+        <button class="btn-reveal" id="revealBtn" onclick="togglePresentation()">Reveal Message</button>
 
         <div class="hidden-content" id="messageBox">
-            <p style="font-weight: 600; color: #f472b6;">✨ You've unlocked the special message! ✨</p>
-            
-            <!-- Contact form directing submissions to your email -->
-            <form action="https://formsubmit.co/mohammedhemmi@gmail.com" method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
+            <div class="special-message">
+                <p>Glad you unlocked this! This space was created just for you. Take a moment, make a wish, or leave any note you want below.</p>
+            </div>
+
+            <div class="wish-section">
+                <h2>✨ Make a Wish ✨</h2>
+                <p>Type your wish below and hit send. No email or personal info needed!</p>
                 
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email Address" required>
-                <textarea name="message" rows="3" placeholder="Write your message here..." required></textarea>
-                
-                <button type="submit" class="btn submit-btn">Send Direct Message</button>
-            </form>
+                <!-- Sends wish directly to your email without requiring her email address -->
+                <form action="https://formsubmit.co/mohammedhemmi@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="✨ A new wish was submitted!">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <textarea name="Wish / Message" rows="4" placeholder="Write your wish or note here..." required></textarea>
+                    
+                    <button type="submit" class="btn-submit">Send Wish ❤️</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
-        function toggleMessage() {
+        function togglePresentation() {
             const box = document.getElementById('messageBox');
             const btn = document.getElementById('revealBtn');
+            
             if (box.style.display === 'block') {
                 box.style.display = 'none';
                 btn.textContent = 'Reveal Message';
             } else {
                 box.style.display = 'block';
-                btn.textContent = 'Hide Message';
+                btn.textContent = 'Hide Section';
             }
         }
     </script>
