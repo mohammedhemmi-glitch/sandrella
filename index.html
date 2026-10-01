@@ -58,7 +58,7 @@
         }
 
         .container, .audio-bar {
-            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         body.cover-active .container,
@@ -69,78 +69,7 @@
         }
 
         /* =====================================================
-           CINEMATIC INTRO (BIRD & FISH)
-        ===================================================== */
-        #cinematic-container {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #050b14;
-            z-index: 5000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1.5s ease, visibility 1.5s ease;
-        }
-
-        #introStage {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        #subtitle-overlay {
-            position: absolute;
-            bottom: 12%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ffffff;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-style: italic;
-            letter-spacing: 1px;
-            text-align: center;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-            pointer-events: none;
-            width: 80%;
-            max-width: 600px;
-            z-index: 5001;
-        }
-
-        #start-btn {
-            position: absolute;
-            padding: 16px 36px;
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--accent-gold-bright);
-            background: rgba(15, 25, 45, 0.6);
-            border: 1px solid rgba(245, 211, 147, 0.4);
-            border-radius: 50px;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
-            transition: all 0.4s ease;
-            z-index: 5002;
-        }
-
-        #start-btn:hover {
-            background: rgba(230, 74, 112, 0.2);
-            border-color: var(--accent-gold);
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(230, 74, 112, 0.4), 0 0 15px var(--accent-gold-glow);
-        }
-
-        /* =====================================================
-           CANVAS BACKGROUND & ATMOSPHERE (MAIN SITE)
+           CANVAS BACKGROUND & ATMOSPHERE
         ===================================================== */
         #bgCanvas {
             position: fixed;
@@ -170,6 +99,118 @@
             background: radial-gradient(circle at 50% 30%, rgba(35, 10, 22, 0.4) 0%, rgba(6, 2, 5, 0.95) 85%);
             z-index: -2;
             pointer-events: none;
+        }
+
+        /* =====================================================
+           INTERACTIVE WAX-SEAL COVER PAGE
+        ===================================================== */
+        .cover-page {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 5000;
+            background-color: var(--bg-void);
+            background: radial-gradient(circle at center, #230814 0%, #060205 90%);
+            overflow: hidden;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s ease;
+        }
+
+        .cover-page.opened {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .cover-card-envelope {
+            position: relative;
+            width: min(90%, 540px);
+            padding: 50px 35px;
+            background: rgba(22, 8, 17, 0.7);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: floatEnvelope 6s ease-in-out infinite;
+        }
+
+        @keyframes floatEnvelope {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .cover-badge {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 0.75rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 10vw, 5.5rem);
+            line-height: 1;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-gold-bright) 60%, var(--accent-rose) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
+        }
+
+        .cover-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--text-sub);
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            max-width: 420px;
+        }
+
+        .wax-seal-btn {
+            position: relative;
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #e64a70 0%, #881c34 70%, #4a0b1a 100%);
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold-bright);
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(230, 74, 112, 0.4), inset 0 2px 6px rgba(255, 255, 255, 0.4);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+
+        .wax-seal-btn:hover {
+            transform: scale(1.12) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(230, 74, 112, 0.7), 0 0 25px var(--accent-gold-glow);
+        }
+
+        .wax-seal-btn::after {
+            content: 'UNSEAL';
+            position: absolute;
+            bottom: -28px;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
         }
 
         /* =====================================================
@@ -1083,6 +1124,14 @@
                 padding: 10px 20px;
                 gap: 12px;
             }
+            .wax-seal-btn {
+                width: 72px;
+                height: 72px;
+                font-size: 1.5rem;
+            }
+            .cover-card-envelope {
+                padding: 40px 22px;
+            }
             .cipher-box {
                 padding: 16px 14px;
             }
@@ -1096,21 +1145,27 @@
 
 <body class="cover-active">
 
-    <!-- =====================================================
-         CINEMATIC INTRO: THE BIRD AND THE FISH
-    ===================================================== -->
-    <div id="cinematic-container">
-        <canvas id="introStage"></canvas>
-        <div id="subtitle-overlay"></div>
-        <button id="start-btn">Begin Journey</button>
-    </div>
-
-    <!-- Canvas Engine for Ambient Particles & Petal Burst (Main Site) -->
+    <!-- Canvas Engine for Ambient Particles & Petal Burst -->
     <canvas id="bgCanvas"></canvas>
 
     <!-- Background Base Layer -->
     <div class="bg-fixed-image"></div>
     <div class="bg-radial-overlay"></div>
+
+    <!-- =====================================================
+         INTERACTIVE ENVELOPE / COVER PAGE
+    ===================================================== -->
+    <div class="cover-page" id="coverPage">
+        <div class="cover-card-envelope">
+            <div class="cover-badge">A Dedicated Chapter</div>
+            <div class="cover-title">Jihan</div>
+            <p class="cover-subtitle">
+                Not just another birthday message.<br>
+                Take a moment. There's a little story waiting inside.
+            </p>
+            <button class="wax-seal-btn" id="openButton" onclick="openBirthday()">J</button>
+        </div>
+    </div>
 
     <!-- =====================================================
          ACHIEVEMENT SYSTEM
@@ -1455,7 +1510,6 @@
             <div class="eq-bar"></div>
         </div>
 
-        <!-- USING IN THE POOL.MP3 -->
         <audio id="bgMusic" loop preload="auto">
             <source src="in the pool.mp3" type="audio/mpeg">
         </audio>
@@ -1466,273 +1520,7 @@
     ===================================================== -->
     <script>
         /* =====================================================
-           CINEMATIC INTRO: THE BIRD AND THE FISH
-        ===================================================== */
-        const introCanvas = document.getElementById('introStage');
-        const introCtx = introCanvas.getContext('2d');
-        const subtitle = document.getElementById('subtitle-overlay');
-        const startBtn = document.getElementById('start-btn');
-        
-        let introW, introH, introWaterLevel;
-        let introFrameId;
-        let introStartTime = null;
-
-        function resizeIntro() {
-            introW = introCanvas.width = window.innerWidth;
-            introH = introCanvas.height = window.innerHeight;
-            introWaterLevel = introH * 0.55;
-        }
-        window.addEventListener('resize', resizeIntro);
-        resizeIntro();
-
-        // Scene entities
-        const bird = { x: -50, y: introWaterLevel - 180, scale: 1, wingAngle: 0, rotation: 0, opacity: 1, color: '#e0f7fa' };
-        const fish1 = { x: introW * 0.5 + 40, y: introWaterLevel + 80, tailAngle: 0, color: '#ff7043' };
-        const fish2 = { x: introW * 0.5 - 40, y: introWaterLevel + 80, tailAngle: 0, opacity: 0, scale: 0.2, color: '#e0f7fa' };
-
-        const introRipples = [];
-        const splashParticles = [];
-
-        function triggerIntroRipple(x, y) {
-            introRipples.push({ x, y, radius: 2, alpha: 0.8 });
-        }
-
-        function createSplash(x, y) {
-            for (let i = 0; i < 35; i++) {
-                splashParticles.push({
-                    x: x, y: y,
-                    vx: (Math.random() - 0.5) * 8,
-                    vy: (Math.random() - 1) * 7,
-                    radius: Math.random() * 3 + 1,
-                    alpha: 1, color: 'rgba(255, 255, 255, 0.8)'
-                });
-            }
-        }
-
-        function setSubtitle(text) {
-            subtitle.style.opacity = '0';
-            setTimeout(() => {
-                subtitle.innerText = text;
-                if (text) subtitle.style.opacity = '1';
-            }, 400);
-        }
-
-        function drawEnvironment(time) {
-            const skyGrad = introCtx.createLinearGradient(0, 0, 0, introWaterLevel);
-            skyGrad.addColorStop(0, '#040814');
-            skyGrad.addColorStop(1, '#1a2a3a');
-            introCtx.fillStyle = skyGrad;
-            introCtx.fillRect(0, 0, introW, introWaterLevel);
-
-            introCtx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-            for (let i = 0; i < 30; i++) {
-                const sx = (Math.sin(i * 99) * 0.5 + 0.5) * introW;
-                const sy = (Math.cos(i * 33) * 0.5 + 0.5) * (introWaterLevel - 50);
-                introCtx.fillRect(sx, sy, 1.5, 1.5);
-            }
-
-            const waterGrad = introCtx.createLinearGradient(0, introWaterLevel, 0, introH);
-            waterGrad.addColorStop(0, '#0d3b66');
-            waterGrad.addColorStop(0.3, '#051c33');
-            waterGrad.addColorStop(1, '#010a14');
-            introCtx.fillStyle = waterGrad;
-            introCtx.fillRect(0, introWaterLevel, introW, introH - introWaterLevel);
-
-            introCtx.beginPath();
-            introCtx.moveTo(0, introWaterLevel);
-            for (let x = 0; x <= introW; x += 20) {
-                const y = introWaterLevel + Math.sin(x * 0.01 + time * 0.003) * 4;
-                introCtx.lineTo(x, y);
-            }
-            introCtx.lineTo(introW, introH);
-            introCtx.lineTo(0, introH);
-            introCtx.closePath();
-            introCtx.fillStyle = 'rgba(13, 59, 102, 0.4)';
-            introCtx.fill();
-
-            introCtx.beginPath();
-            introCtx.moveTo(0, introWaterLevel);
-            for (let x = 0; x <= introW; x += 10) {
-                const y = introWaterLevel + Math.sin(x * 0.015 + time * 0.003) * 3;
-                introCtx.lineTo(x, y);
-            }
-            introCtx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
-            introCtx.lineWidth = 1.5;
-            introCtx.stroke();
-        }
-
-        function drawIntroEffects() {
-            for (let i = introRipples.length - 1; i >= 0; i--) {
-                const r = introRipples[i];
-                r.radius += 0.8;
-                r.alpha -= 0.012;
-                if (r.alpha <= 0) { introRipples.splice(i, 1); continue; }
-                introCtx.beginPath();
-                introCtx.ellipse(r.x, r.y, r.radius * 2, r.radius * 0.6, 0, 0, Math.PI * 2);
-                introCtx.strokeStyle = `rgba(255, 255, 255, ${r.alpha})`;
-                introCtx.lineWidth = 1;
-                introCtx.stroke();
-            }
-
-            for (let i = splashParticles.length - 1; i >= 0; i--) {
-                const p = splashParticles[i];
-                p.x += p.vx; p.y += p.vy; p.vy += 0.2; p.alpha -= 0.02;
-                if (p.alpha <= 0) { splashParticles.splice(i, 1); continue; }
-                introCtx.beginPath();
-                introCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                introCtx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-                introCtx.fill();
-            }
-        }
-
-        function drawBird(x, y, scale, wingAngle, rotation, opacity, color) {
-            if (opacity <= 0) return;
-            introCtx.save();
-            introCtx.translate(x, y); introCtx.rotate(rotation); introCtx.scale(scale, scale);
-            introCtx.globalAlpha = opacity; introCtx.fillStyle = color;
-            
-            introCtx.beginPath(); introCtx.ellipse(0, 0, 16, 8, 0, 0, Math.PI * 2); introCtx.fill();
-            introCtx.beginPath(); introCtx.arc(12, -4, 6, 0, Math.PI * 2); introCtx.fill();
-            
-            introCtx.fillStyle = '#ffb74d';
-            introCtx.beginPath(); introCtx.moveTo(17, -5); introCtx.lineTo(24, -2); introCtx.lineTo(17, 0); introCtx.fill();
-            
-            introCtx.fillStyle = color;
-            introCtx.beginPath(); introCtx.moveTo(-2, -4);
-            introCtx.quadraticCurveTo(0, -20 + wingAngle * 10, -14, -22 + wingAngle * 12);
-            introCtx.quadraticCurveTo(-6, -8, -2, -4); introCtx.fill();
-            
-            introCtx.beginPath(); introCtx.moveTo(-15, 0); introCtx.lineTo(-26, -6); introCtx.lineTo(-24, 2); introCtx.fill();
-            introCtx.restore();
-        }
-
-        function drawFish(fish, facingLeft = false) {
-            if (fish.opacity !== undefined && fish.opacity <= 0) return;
-            introCtx.save();
-            introCtx.translate(fish.x, fish.y);
-            if (facingLeft) introCtx.scale(-1, 1);
-            if (fish.scale) introCtx.scale(fish.scale, fish.scale);
-            if (fish.opacity !== undefined) introCtx.globalAlpha = fish.opacity;
-
-            introCtx.fillStyle = fish.color;
-            introCtx.beginPath(); introCtx.ellipse(0, 0, 18, 10, 0, 0, Math.PI * 2); introCtx.fill();
-            
-            introCtx.beginPath(); introCtx.moveTo(14, 0);
-            introCtx.lineTo(26 + Math.sin(fish.tailAngle) * 4, -10); introCtx.lineTo(22, 0);
-            introCtx.lineTo(26 + Math.sin(fish.tailAngle) * 4, 10); introCtx.fill();
-            
-            introCtx.fillStyle = '#ffffff'; introCtx.beginPath(); introCtx.arc(-10, -3, 3, 0, Math.PI * 2); introCtx.fill();
-            introCtx.fillStyle = '#050b14'; introCtx.beginPath(); introCtx.arc(-11, -3, 1.5, 0, Math.PI * 2); introCtx.fill();
-            
-            introCtx.fillStyle = fish.color;
-            introCtx.beginPath(); introCtx.moveTo(-2, 6); introCtx.quadraticCurveTo(2, 14, -6, 12); introCtx.fill();
-            introCtx.restore();
-        }
-
-        function animateIntro(timestamp) {
-            if (!introStartTime) introStartTime = timestamp;
-            const elapsed = (timestamp - introStartTime) / 1000; 
-
-            introCtx.clearRect(0, 0, introW, introH);
-            drawEnvironment(timestamp);
-
-            fish1.tailAngle += 0.15; fish2.tailAngle += 0.15;
-
-            if (elapsed < 4) {
-                const t = elapsed / 4;
-                bird.x = -50 + (introW * 0.5 - 40 + 50) * Math.min(t * 1.1, 1);
-                bird.y = (introWaterLevel - 180) + (introWaterLevel - 12 - (introWaterLevel - 180)) * Math.sin(t * Math.PI * 0.5);
-                bird.wingAngle = Math.sin(elapsed * 12); bird.rotation = 0.1;
-                if (elapsed > 3.8 && introRipples.length === 0) triggerIntroRipple(bird.x, introWaterLevel);
-            } 
-            else if (elapsed >= 4 && elapsed < 8) {
-                bird.x = introW * 0.5 - 40; bird.y = introWaterLevel - 6;
-                bird.wingAngle = Math.sin(elapsed * 2) * 0.2; bird.rotation = 0;
-                if (elapsed >= 4.2 && elapsed < 4.5) setSubtitle("“I will do my best to be with you...”");
-            } 
-            else if (elapsed >= 8 && elapsed < 11) {
-                if (elapsed < 8.3) setSubtitle("");
-                const leapT = (elapsed - 8) / 3;
-                if (leapT < 0.4) {
-                    bird.y = (introWaterLevel - 6) - Math.sin((leapT / 0.4) * Math.PI) * 40;
-                    bird.rotation = -0.3; bird.wingAngle = Math.sin(elapsed * 16);
-                } else {
-                    bird.y = (introWaterLevel - 46) + ((introWaterLevel + 70) - (introWaterLevel - 46)) * ((leapT - 0.4) / 0.6);
-                    bird.rotation = 0.8; bird.wingAngle = -0.5;
-                    if (bird.y >= introWaterLevel && splashParticles.length === 0) {
-                        createSplash(bird.x, introWaterLevel); triggerIntroRipple(bird.x, introWaterLevel);
-                    }
-                }
-            } 
-            else if (elapsed >= 11 && elapsed < 16) {
-                const transT = (elapsed - 11) / 5;
-                bird.y = introWaterLevel + 70; bird.opacity = Math.max(0, 1 - transT * 1.5);
-                fish2.x = bird.x; fish2.y = bird.y + 10;
-                fish2.opacity = Math.min(1, transT * 1.2); fish2.scale = Math.min(1, 0.2 + transT * 0.8);
-                if (transT < 0.8) {
-                    introCtx.save(); introCtx.beginPath(); introCtx.arc(bird.x, bird.y, 10 + transT * 30, 0, Math.PI * 2);
-                    introCtx.fillStyle = `rgba(224, 247, 250, ${0.6 - transT * 0.6})`; introCtx.fill(); introCtx.restore();
-                }
-                if (elapsed >= 13 && elapsed < 13.3) setSubtitle("“Now, we share the same world.”");
-            } 
-            else if (elapsed >= 16) {
-                if (elapsed >= 18.5) setSubtitle("");
-                const swimT = (elapsed - 16) / 4;
-                fish1.x = (introW * 0.5 + 40) + swimT * 60; fish1.y = (introWaterLevel + 80) + Math.sin(swimT * Math.PI * 2) * 20;
-                fish2.x = (introW * 0.5 - 40) + swimT * 60; fish2.y = (introWaterLevel + 80) + Math.sin(swimT * Math.PI * 2 + 0.5) * 20;
-                fish2.opacity = 1; fish2.scale = 1; bird.opacity = 0;
-            }
-
-            drawIntroEffects();
-            drawBird(bird.x, bird.y, bird.scale, bird.wingAngle, bird.rotation, bird.opacity, bird.color);
-            drawFish(fish1, true); drawFish(fish2, true);
-
-            if (elapsed < 21) {
-                introFrameId = requestAnimationFrame(animateIntro);
-            } else {
-                finishIntroSequence();
-            }
-        }
-
-        function finishIntroSequence() {
-            const cinematic = document.getElementById('cinematic-container');
-            cinematic.style.opacity = '0';
-            document.body.classList.remove('cover-active');
-
-            setTimeout(() => {
-                cinematic.style.visibility = 'hidden';
-                window.scrollTo({ top: 0, behavior: 'instant' });
-                revealElements.forEach(element => {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.top < window.innerHeight) {
-                        element.classList.add('visible');
-                    }
-                });
-                cinematic.remove(); // Clean up from DOM
-            }, 1500);
-        }
-
-        startBtn.addEventListener('click', () => {
-            startBtn.style.display = 'none';
-            const audio = document.getElementById('bgMusic');
-            const playButton = document.getElementById('playToggle');
-            const audioBar = document.getElementById('audioBar');
-
-            audio.play().then(() => {
-                playButton.innerHTML = '❚❚';
-                audioBar.classList.add('audio-playing');
-            }).catch(() => {
-                console.log('Autoplay blocked.');
-            });
-
-            introStartTime = null;
-            introRipples.length = 0;
-            splashParticles.length = 0;
-            animateIntro(performance.now());
-        });
-
-        /* =====================================================
-           2D CANVAS PARTICLE & PETAL BURST SYSTEM (MAIN SITE)
+           2D CANVAS PARTICLE & PETAL BURST SYSTEM
         ===================================================== */
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
@@ -1747,68 +1535,100 @@
         resizeCanvas();
 
         class Particle {
-            constructor() { this.reset(); }
+            constructor() {
+                this.reset();
+            }
             reset() {
-                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.2 + 0.5; this.speedY = -(Math.random() * 0.4 + 0.1);
-                this.speedX = (Math.random() - 0.5) * 0.3; this.opacity = Math.random() * 0.6 + 0.2;
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.2 + 0.5;
+                this.speedY = -(Math.random() * 0.4 + 0.1);
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.6 + 0.2;
                 this.hue = Math.random() > 0.5 ? 340 : 42;
             }
             update() {
-                this.y += this.speedY; this.x += this.speedX;
+                this.y += this.speedY;
+                this.x += this.speedX;
                 if (this.y < -10) this.y = canvas.height + 10;
                 if (this.x < -10 || this.x > canvas.width + 10) this.reset();
             }
             draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = `hsla(${this.hue}, 85%, 75%, ${this.opacity})`;
-                ctx.shadowBlur = 8; ctx.shadowColor = `hsla(${this.hue}, 85%, 75%, 0.8)`; ctx.fill();
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = `hsla(${this.hue}, 85%, 75%, 0.8)`;
+                ctx.fill();
             }
         }
 
         class Petal {
             constructor(x, y) {
-                this.x = x; this.y = y; this.size = Math.random() * 8 + 4;
-                this.speedY = Math.random() * 3 + 1; this.speedX = (Math.random() - 0.5) * 4;
-                this.rotation = Math.random() * 360; this.rotSpeed = (Math.random() - 0.5) * 4;
-                this.opacity = 1; this.color = Math.random() > 0.4 ? '#e64a70' : '#f5d393';
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 8 + 4;
+                this.speedY = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 4;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = (Math.random() - 0.5) * 4;
+                this.opacity = 1;
+                this.color = Math.random() > 0.4 ? '#e64a70' : '#f5d393';
             }
             update() {
-                this.y += this.speedY; this.x += this.speedX;
-                this.rotation += this.rotSpeed; this.opacity -= 0.008;
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotSpeed;
+                this.opacity -= 0.008;
             }
             draw() {
-                ctx.save(); ctx.translate(this.x, this.y); ctx.rotate((this.rotation * Math.PI) / 180);
-                ctx.fillStyle = this.color; ctx.globalAlpha = Math.max(0, this.opacity);
-                ctx.beginPath(); ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, Math.PI * 2); ctx.fill();
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = Math.max(0, this.opacity);
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, Math.PI * 2);
+                ctx.fill();
                 ctx.restore();
             }
         }
 
-        for (let i = 0; i < 60; i++) particles.push(new Particle());
+        for (let i = 0; i < 60; i++) {
+            particles.push(new Particle());
+        }
 
         function triggerPetalBurst() {
-            const centerX = window.innerWidth / 2; const centerY = window.innerHeight / 2;
-            for (let i = 0; i < 70; i++) petals.push(new Petal(centerX, centerY));
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            for (let i = 0; i < 70; i++) {
+                petals.push(new Petal(centerX, centerY));
+            }
         }
 
-        function animateMainCanvas() {
+        function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
             petals.forEach((petal, index) => {
-                petal.update(); petal.draw();
+                petal.update();
+                petal.draw();
                 if (petal.opacity <= 0) petals.splice(index, 1);
             });
-            requestAnimationFrame(animateMainCanvas);
+            requestAnimationFrame(animateCanvas);
         }
-        animateMainCanvas();
+        animateCanvas();
 
         document.addEventListener('mousemove', (e) => {
             const cards = document.querySelectorAll('.glass-card');
             cards.forEach(card => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`); card.style.setProperty('--mouse-y', `${y}px`);
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
             });
         });
 
@@ -1823,46 +1643,97 @@
             const cipherEl = document.getElementById('jihanCipher');
             const targetText = cipherEl.getAttribute('data-value');
             let iteration = 0;
+
             clearInterval(cipherInterval);
 
             cipherInterval = setInterval(() => {
-                cipherEl.innerText = targetText.split('').map((char, index) => {
-                    if (index < iteration) return targetText[index];
-                    return glyphSymbols[Math.floor(Math.random() * glyphSymbols.length)];
-                }).join(' ');
+                cipherEl.innerText = targetText
+                    .split('')
+                    .map((char, index) => {
+                        if (index < iteration) {
+                            return targetText[index];
+                        }
+                        return glyphSymbols[Math.floor(Math.random() * glyphSymbols.length)];
+                    })
+                    .join(' ');
 
                 if (iteration >= targetText.length) {
                     clearInterval(cipherInterval);
                     if (!cipherDecoded) {
                         cipherDecoded = true;
-                        showAchievement('NAME DECRYPTED ✨', 'Target identified: JIHAN.<br>The central star of this story. 👑');
+                        showAchievement(
+                            'NAME DECRYPTED ✨',
+                            'Target identified: JIHAN.<br>The central star of this story. 👑'
+                        );
                     }
                 }
+
                 iteration += 1 / 3;
             }, 50);
         }
 
         /* =====================================================
+           OPEN COVER & START MUSIC
+        ===================================================== */
+        function openBirthday() {
+            const cover = document.getElementById('coverPage');
+            const audio = document.getElementById('bgMusic');
+            const playButton = document.getElementById('playToggle');
+            const audioBar = document.getElementById('audioBar');
+
+            audio.play().then(() => {
+                playButton.innerHTML = '❚❚';
+                audioBar.classList.add('audio-playing');
+            }).catch(() => {
+                console.log('Autoplay blocked. Press play manually.');
+            });
+
+            document.body.classList.remove('cover-active');
+            cover.classList.add('opened');
+
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                revealElements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top < window.innerHeight) {
+                        element.classList.add('visible');
+                    }
+                });
+            }, 400);
+        }
+
+        /* =====================================================
            BIRTHDAY VAULT & MISSION CONTROL
         ===================================================== */
-        function toggleCard(card) { card.classList.toggle('revealed'); }
+        function toggleCard(card) {
+            card.classList.toggle('revealed');
+        }
 
-        let completedMissions = 0; const totalMissions = 6;
+        let completedMissions = 0;
+        const totalMissions = 6;
 
         function completeMission(item) {
             if (item.classList.contains('completed')) return;
+
             item.classList.add('completed');
-            const status = item.querySelector('.mission-status'); status.innerText = '✓ Mission completed.';
+            const status = item.querySelector('.mission-status');
+            status.innerText = '✓ Mission completed.';
+
             completedMissions++;
             const percentage = (completedMissions / totalMissions) * 100;
             document.getElementById('missionProgress').style.width = percentage + '%';
-            const result = document.getElementById('missionResult');
 
-            if (completedMissions === 1) result.innerText = '1 / 6 missions completed. Movement detected. 😌';
-            else if (completedMissions < totalMissions) result.innerText = `${completedMissions} / 6 missions completed. Keep going. ✨`;
-            else {
+            const result = document.getElementById('missionResult');
+            if (completedMissions === 1) {
+                result.innerText = '1 / 6 missions completed. Movement detected. 😌';
+            } else if (completedMissions < totalMissions) {
+                result.innerText = `${completedMissions} / 6 missions completed. Keep going. ✨`;
+            } else {
                 result.innerText = '6 / 6 missions completed. Birthday successfully deployed. 🎉';
-                showAchievement('MISSION COMPLETE ✨', 'All missions completed. Official status: birthday achieved.');
+                showAchievement(
+                    'MISSION COMPLETE ✨',
+                    'All missions completed. Official status: birthday achieved.'
+                );
                 triggerPetalBurst();
             }
         }
@@ -1873,35 +1744,64 @@
         function revealFinalMessage() {
             const message = document.getElementById('finalSecret');
             const button = document.getElementById('finalButton');
-            message.classList.add('show'); button.innerText = "Okay... that's enough 😂"; button.disabled = true;
+
+            message.classList.add('show');
+            button.innerText = "Okay... that's enough 😂";
+            button.disabled = true;
+
             triggerPetalBurst();
-            setTimeout(() => { message.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 200);
+
+            setTimeout(() => {
+                message.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
         }
 
         /* =====================================================
            MAKE A WISH (EMAIL SUBMISSION SERVICE)
         ===================================================== */
         function sendWish() {
-            const wishInput = document.getElementById('wishInput'); const sendBtn = document.getElementById('sendWishBtn');
-            const feedback = document.getElementById('wishFeedback'); const wishText = wishInput.value.trim();
+            const wishInput = document.getElementById('wishInput');
+            const sendBtn = document.getElementById('sendWishBtn');
+            const feedback = document.getElementById('wishFeedback');
+            const wishText = wishInput.value.trim();
 
-            if (!wishText) { feedback.innerText = "Please write your wish before sending! ✨"; feedback.classList.add('show'); return; }
+            if (!wishText) {
+                feedback.innerText = "Please write your wish before sending! ✨";
+                feedback.classList.add('show');
+                return;
+            }
 
-            sendBtn.disabled = true; sendBtn.innerText = "Sending into the night sky..."; feedback.innerText = "";
+            sendBtn.disabled = true;
+            sendBtn.innerText = "Sending into the night sky...";
+            feedback.innerText = "";
 
+            // Background fetch directly to your email via FormSubmit AJAX
             fetch("https://formsubmit.co/ajax/mohammedhemmi@gmail.com", {
-                method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ _subject: "✨ Jihan Made a Birthday Wish!", wish: wishText, timestamp: new Date().toLocaleString() })
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: "✨ Jihan Made a Birthday Wish!",
+                    wish: wishText,
+                    timestamp: new Date().toLocaleString()
+                })
             })
             .then(response => response.json())
             .then(data => {
-                sendBtn.innerText = "Wish Sent ✨"; wishInput.value = "";
-                feedback.innerText = "Your wish has been carried into the night sky. May it come true. 🌙✨"; feedback.classList.add('show');
-                triggerPetalBurst(); showAchievement("WISH SENT ✨", "Your wish has been carried into the stars.");
+                sendBtn.innerText = "Wish Sent ✨";
+                wishInput.value = "";
+                feedback.innerText = "Your wish has been carried into the night sky. May it come true. 🌙✨";
+                feedback.classList.add('show');
+                triggerPetalBurst();
+                showAchievement("WISH SENT ✨", "Your wish has been carried into the stars.");
             })
             .catch(error => {
-                sendBtn.disabled = false; sendBtn.innerText = "Send Wish Into The Stars ✨";
-                feedback.innerText = "Something went wrong sending your wish. Please try again!"; feedback.classList.add('show');
+                sendBtn.disabled = false;
+                sendBtn.innerText = "Send Wish Into The Stars ✨";
+                feedback.innerText = "Something went wrong sending your wish. Please try again!";
+                feedback.classList.add('show');
             });
         }
 
@@ -1909,14 +1809,21 @@
            AUDIO PLAYER & CONTROLS
         ===================================================== */
         function toggleAudio() {
-            const audio = document.getElementById('bgMusic'); const btn = document.getElementById('playToggle');
+            const audio = document.getElementById('bgMusic');
+            const btn = document.getElementById('playToggle');
             const audioBar = document.getElementById('audioBar');
 
             if (audio.paused) {
-                audio.play().then(() => { btn.innerHTML = '❚❚'; audioBar.classList.add('audio-playing'); })
-                .catch(() => { alert("Ensure 'in the pool.mp3' is placed in the same folder as this index.html file."); });
+                audio.play().then(() => {
+                    btn.innerHTML = '❚❚';
+                    audioBar.classList.add('audio-playing');
+                }).catch(() => {
+                    alert("Ensure 'in the pool.mp3' is placed in the same folder as this index.html file.");
+                });
             } else {
-                audio.pause(); btn.innerHTML = '▶'; audioBar.classList.remove('audio-playing');
+                audio.pause();
+                btn.innerHTML = '▶';
+                audioBar.classList.remove('audio-playing');
             }
         }
 
@@ -1928,11 +1835,14 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    if (entry.target.id === 'jihanCipherSection') triggerCipherDecryption();
+                    if (entry.target.id === 'jihanCipherSection') {
+                        triggerCipherDecryption();
+                    }
                     revealObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.12 });
+
         revealElements.forEach(el => revealObserver.observe(el));
 
         /* =====================================================
@@ -1943,35 +1853,52 @@
         const achievementText = document.getElementById('achievementText');
 
         function showAchievement(title, text) {
-            achievement.querySelector('.achievement-title').innerText = title; achievementText.innerHTML = text;
-            achievement.classList.add('show'); setTimeout(() => { achievement.classList.remove('show'); }, 5000);
+            achievement.querySelector('.achievement-title').innerText = title;
+            achievementText.innerHTML = text;
+            achievement.classList.add('show');
+            setTimeout(() => {
+                achievement.classList.remove('show');
+            }, 5000);
         }
 
-        let titleClicks = 0; let achievementTriggered = false;
+        let titleClicks = 0;
+        let achievementTriggered = false;
+
         birthdayTitle.addEventListener('click', () => {
             if (achievementTriggered) return;
-            titleClicks++; birthdayTitle.style.transform = `scale(${1 + titleClicks * 0.015})`;
+            titleClicks++;
+            birthdayTitle.style.transform = `scale(${1 + titleClicks * 0.015})`;
+
             if (titleClicks >= 5) {
                 achievementTriggered = true;
-                showAchievement('SECRET UNLOCKED ✨', 'Birthday Girl detected.<br>You have officially clicked something you were not supposed to click. 😂');
-                birthdayTitle.style.transform = 'scale(1)'; triggerPetalBurst();
+                showAchievement(
+                    'SECRET UNLOCKED ✨',
+                    'Birthday Girl detected.<br>You have officially clicked something you were not supposed to click. 😂'
+                );
+                birthdayTitle.style.transform = 'scale(1)';
+                triggerPetalBurst();
             }
         });
 
         let secretCode = '';
         document.addEventListener('keydown', (e) => {
-            secretCode += e.key.toLowerCase(); if (secretCode.length > 15) secretCode = secretCode.slice(-15);
+            secretCode += e.key.toLowerCase();
+            if (secretCode.length > 15) secretCode = secretCode.slice(-15);
             if (secretCode.includes('jihan')) {
-                showAchievement('SECRET DISCOVERED ✨', 'You typed the secret word.<br>Okay detective. 😂'); secretCode = ''; triggerPetalBurst();
+                showAchievement('SECRET DISCOVERED ✨', 'You typed the secret word.<br>Okay detective. 😂');
+                secretCode = '';
+                triggerPetalBurst();
             }
         });
 
         const bgMusic = document.getElementById('bgMusic');
         bgMusic.addEventListener('play', () => {
-            document.getElementById('playToggle').innerHTML = '❚❚'; document.getElementById('audioBar').classList.add('audio-playing');
+            document.getElementById('playToggle').innerHTML = '❚❚';
+            document.getElementById('audioBar').classList.add('audio-playing');
         });
         bgMusic.addEventListener('pause', () => {
-            document.getElementById('playToggle').innerHTML = '▶'; document.getElementById('audioBar').classList.remove('audio-playing');
+            document.getElementById('playToggle').innerHTML = '▶';
+            document.getElementById('audioBar').classList.remove('audio-playing');
         });
     </script>
 </body>
